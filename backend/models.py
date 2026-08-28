@@ -75,6 +75,14 @@ class AgentAssessment(BaseModel):
     insufficient_info_notes: Optional[str] = Field(None, description="Notes on what required details were missing")
 
 
+class DebateTopic(BaseModel):
+    """A prioritized topic of disagreement identified across initial agent assessments."""
+    topic: str = Field(..., description="Focal topic or disputed claim")
+    agents_involved: List[AgentRole] = Field(..., description="The agents in primary disagreement")
+    disagreement_description: str = Field(..., description="Summary of the substantive conflict or differing interpretations")
+    relevant_evidence_ids: List[str] = Field(default_factory=list, description="Relevant evidence IDs from the EvidenceStore")
+
+
 class DebateTurn(BaseModel):
     """Single turn or cross-examination in the agent debate."""
     speaker: AgentRole = Field(..., description="Agent presenting the argument")
