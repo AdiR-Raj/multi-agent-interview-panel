@@ -112,6 +112,7 @@ class FinalDecision(BaseModel):
     unresolved_disagreements: List[str] = Field(default_factory=list, description="Points where agents remained in conflict")
     synthesis_rationale: str = Field(..., description="Qualitative reasoning connecting evidence and debate to decision")
     insufficient_information_flags: List[str] = Field(default_factory=list, description="Explicit missing information callouts")
+    decisive_evidence: List[EvidenceReference] = Field(default_factory=list, description="Primary grounded evidence citations supporting final decision")
 
 
 class CandidateEvaluation(BaseModel):
