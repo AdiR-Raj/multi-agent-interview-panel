@@ -72,10 +72,10 @@ class DebateEngine:
     @property
     def client(self) -> OpenAI:
         if self._client is None:
-            api_key = settings.OPENAI_API_KEY or "missing-api-key"
+            api_key = settings.LLM_API_KEY or "missing-api-key"
             self._client = OpenAI(
                 api_key=api_key,
-                base_url=settings.OPENAI_BASE_URL,
+                base_url=settings.LLM_BASE_URL,
             )
         return self._client
 
@@ -188,7 +188,7 @@ Present your direct challenge to {target_role.value} regarding "{topic_obj.topic
 """
         try:
             response = self.client.chat.completions.create(
-                model=settings.OPENAI_MODEL,
+                model=settings.LLM_MODEL,
                 temperature=0.3,
                 response_format={"type": "json_object"},
                 messages=[
@@ -251,7 +251,7 @@ Respond directly to the {target_role.value}'s argument above.
 """
         try:
             response = self.client.chat.completions.create(
-                model=settings.OPENAI_MODEL,
+                model=settings.LLM_MODEL,
                 temperature=0.3,
                 response_format={"type": "json_object"},
                 messages=[

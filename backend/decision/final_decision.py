@@ -72,10 +72,10 @@ class FinalDecisionEngine:
     @property
     def client(self) -> OpenAI:
         if self._client is None:
-            api_key = settings.OPENAI_API_KEY or "missing-api-key"
+            api_key = settings.LLM_API_KEY or "missing-api-key"
             self._client = OpenAI(
                 api_key=api_key,
-                base_url=settings.OPENAI_BASE_URL,
+                base_url=settings.LLM_BASE_URL,
             )
         return self._client
 
@@ -189,7 +189,7 @@ Do not calculate an average score or rely on voting. Provide rigorous qualitativ
 
         try:
             response = self.client.chat.completions.create(
-                model=settings.OPENAI_MODEL,
+                model=settings.LLM_MODEL,
                 temperature=0.2,
                 response_format={"type": "json_object"},
                 messages=[
